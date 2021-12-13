@@ -3,8 +3,15 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
 
+def handle_404(request, exception):
+    return redirect('home')
+
+
 def home(request):
-    return render(request, 'places_remember/home.html')
+    if request.user.is_authenticated:
+        return redirect('my_memories')
+    else:
+        return render(request, 'socialaccount/home.html')
 
 
 @login_required
