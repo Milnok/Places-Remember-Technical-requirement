@@ -1,0 +1,14 @@
+{% load socialaccount %}
+{% load i18n %}
+
+{% if user.is_authenticated %}
+<h1>Hello {{ user.username }}</h1>
+{% endif %}
+
+
+<a href="{% provider_login_url 'vk'%}"> Войти через VK </a>
+
+<button><a href="{% url 'logoutuser' %}">Выйти с аккаунта</a></button>
+
+
+
