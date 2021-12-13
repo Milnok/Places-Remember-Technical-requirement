@@ -22,3 +22,14 @@ def logoutuser(request):
     else:
         logout(request)
         return redirect('home')
+
+
+@login_required
+def my_memories(request):
+    return render(request, 'places_remember/my_memories.html')
+
+
+
+@login_required
+def create_memory(request):
+    return render(request, 'places_remember/create_memory.html')
