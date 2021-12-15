@@ -3,7 +3,8 @@
 <div class="row">
     <div class="col-2">
         <nav class="nav flex-column">
-            <h3>{{ user.username }}</h3>
+            <Img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" Width="200" Height="150">
+            <h4>{{ user.first_name }} {{ user.last_name }}</h4>
             <a class="nav-link" href="{% url 'home' %}">Мои воспоминания</a>
             <a class="nav-link" href="{% url 'create_memory' %}">Создать воспоминание</a>
             <a class="nav-link" href="{% url 'logoutuser' %}">Выйти из аккаунта</a>

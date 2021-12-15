@@ -3,5 +3,10 @@
 
 <h1>my memories</h1>
 
+{% for memory in memories %}
+<a href="{% url 'details' memory.id %}">
+<h3>{{ memory }}</h3>
+</a>
+{% endfor %}
 
 {% endblock %}

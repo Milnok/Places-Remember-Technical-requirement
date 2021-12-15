@@ -1,6 +1,11 @@
 ymaps.ready(init);
 function init() {
-    var coords = [55.99706, 92.8764193]
+    if (document.getElementById('coords').value === ''){
+        var coords = [55.99706, 92.8764193]
+    } else {
+        var coords = document.getElementById('coords').value.split(',')
+        var coords = coords.map(Number)
+    }
     document.getElementById('coords').value = coords
     var myPlacemark,
         myMap = new ymaps.Map('map', {
