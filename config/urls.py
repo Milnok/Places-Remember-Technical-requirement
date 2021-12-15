@@ -11,7 +11,5 @@ urlpatterns = [
 
     path('my_memories/', views.my_memories, name='my_memories'),
     path('create_memory/', views.create_memory, name='create_memory'),
-
-    #path('^.*/$', views.view_404)
 ]
 handler404 = 'places_remember.views.handle_404'

@@ -1,7 +1,30 @@
+<!DOCTYPE html>
 {% extends "places_remember/base.html" %}
 {% block content %}
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+<head>
+    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=&lang=ru_RU" type="text/javascript">
+    </script>
+    <script src="{% static 'js/script.js' %}" type="text/javascript">
+    </script>
+</head>
 
-create memory
+
+<body>
+<form method="POST" action="">{% csrf_token %}
+    <div id="map" style="width: 600px; height: 400px"></div>
+    <input type="hidden" id="coords" name="coords">
+    {{ form.title }}
+    {{ form.discription }}
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Отправить</button>
+</form>
+</body>
+
+
+</html>
 
 {% endblock %}
