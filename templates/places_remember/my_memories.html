@@ -1,12 +1,17 @@
 {% extends "places_remember/base.html" %}
 {% block content %}
 
+
+{% if memories %}
 Мои воспоминания
-    {% for memory in memories %}
-    <a href="{% url 'details' memory.id %}"
-       class="list-group-item list-group-item-action list-group-item-primary">
-        {{ memory.title }}
-    </a>
-    {% endfor %}
+{% for memory in memories %}
+<a href="{% url 'details' memory.id %}"
+   class="list-group-item list-group-item-action list-group-item-primary">
+    {{ memory.title }}
+</a>
+{% endfor %}
+{% else %}
+У вас нет воспоминаний, но вы можете его создать!
+{% endif %}
 
 {% endblock %}

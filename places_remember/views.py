@@ -29,8 +29,11 @@ def logoutuser(request):
 
 @login_required
 def my_memories(request):
-    all_memories = Place.objects.all()
-    return render(request, 'places_remember/my_memories.html', {'memories': all_memories})
+    all_memories = Place.objects.filter(user=request.user)
+    context = {}
+    if all_memories != None:
+        context['memories'] = all_memories
+    return render(request, 'places_remember/my_memories.html', context)
 
 
 @login_required
