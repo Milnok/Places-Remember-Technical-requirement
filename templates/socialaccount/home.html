@@ -1,13 +1,17 @@
+{% extends "socialaccount/base.html" %}
 {% load socialaccount %}
 {% load i18n %}
 
-{% if user.is_authenticated %}
-<h1>Hello {{ user.username }}</h1>
-{% endif %}
 
-
-<a href="{% provider_login_url 'vk'%}"> Войти через VK </a>
-
+{% block content %}
+<body>
+<div class="div-1">
+    <form method="POST" action="{% provider_login_url 'vk'%}">{% csrf_token %}
+        <button class="btn btn-primary btn-lg" type="submit"> Войти через VK</button>
+    </form>
+</div>
+</body>
+{% endblock %}
 
 
 

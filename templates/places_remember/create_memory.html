@@ -13,19 +13,28 @@
     </script>
 </head>
 
-
 <body>
-<form method="POST" action="">{% csrf_token %}
-    <div class="map" id="map"></div>
-    <input type="hidden" id="coords" name="coords" value="{{ coords }}">
-    {{ form.title }}
-    {{ form.discription }}
-    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Сохранить воспоминание</button>
-</form>
-{% if memory %}
-<form method="POST" action="{% url 'delete' memory.id %}">{% csrf_token %}
-    <button class="btn btn-outline-secondary" type="submit">Удалить воспоминание</button>
-</form>
+<div class="map" id="map"></div>
+<div class="div2">
+    <form method="POST" action="">{% csrf_token %}
+        <input type="hidden" id="coords" name="coords" value="{{ coords }}">
+        Название места
+        {{ form.title }}
+        Описание места
+        {{ form.discription }}
+        <button class="btn btn-success btn-lg" type="submit" id="button-addon2">
+            {% if memory %}
+            Сохранить воспоминание
+            {% else %}
+            Создать воспоминание
+            {% endif %}
+        </button>
+    </form>
+    {% if memory %}
+    <form method="POST" action="{% url 'delete' memory.id %}">{% csrf_token %}
+        <button class="btn btn-danger btn-lg" type="submit">Удалить воспоминание</button>
+    </form>
+</div>
 {% endif %}
 
 

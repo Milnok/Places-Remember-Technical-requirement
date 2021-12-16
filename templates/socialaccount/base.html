@@ -1,1 +1,27 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<style>
+    body {
+        overflow-x: hidden !important;
+        background: url({% static "back.jpg" %}) no-repeat center center fixed;
+    }
+    .div-1{
+    background: rgba(161,243,240,0.5);
+    border: 2px solid black;
+    padding: 70px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+    }
+
+
+</style>
+
+
 {% block content %}{% endblock %}

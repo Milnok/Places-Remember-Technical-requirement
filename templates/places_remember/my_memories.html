@@ -1,13 +1,12 @@
 {% extends "places_remember/base.html" %}
 {% block content %}
-<body>
-<h1>my memories</h1>
 
-{% for memory in memories %}
-<a href="{% url 'details' memory.id %}">
-<h3>{{ memory }}</h3>
-</a>
-{% endfor %}
+Мои воспоминания
+    {% for memory in memories %}
+    <a href="{% url 'details' memory.id %}"
+       class="list-group-item list-group-item-action list-group-item-primary">
+        {{ memory.title }}
+    </a>
+    {% endfor %}
 
 {% endblock %}
-</body>

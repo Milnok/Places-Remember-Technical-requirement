@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from .forms import PlaceForm
 from .models import Place
 
@@ -70,8 +71,10 @@ def delete_memory(request, memory_pk):
 
 @login_required
 def create_or_edit_place(request, memory_pk=None):
+    form = PlaceForm(request.POST)
+    if not form.is_valid():
+        raise Http404('Слишком много текста, думаю можно и поменьше')
     if memory_pk is None:
-        form = PlaceForm(request.POST)
         place = form.save(commit=False)
         place.user = request.user
     else:
