@@ -1,4 +1,20 @@
+.html{
+    overflow:  hidden;
+}
+.body {
+    overflow-x: hidden !important;
+    background: no-repeat center center fixed;
+}
 .map {
 	width: 500px;
 	height: 300px;
 }
+.photo{
+    Width: 200px;
+    Height: 200px;
+}
+.div1{
+    background: rgba(123,123,123,0.8);
+    text-align: center;
+}
+style="background: url('{% static 'back.jpg' %}')"
