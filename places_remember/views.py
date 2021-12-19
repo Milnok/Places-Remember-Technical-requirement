@@ -29,10 +29,7 @@ def logoutuser(request):
 
 @login_required
 def my_memories(request):
-    all_memories = Place.objects.filter(user=request.user)
-    context = {}
-    if all_memories != None:
-        context['memories'] = all_memories
+    context = get_my_memories_context(request)
     return render(request, 'places_remember/my_memories.html', context)
 
 
@@ -40,17 +37,10 @@ def my_memories(request):
 def memory_details(request, memory_pk):
     # Viewing or modifying existing memories
     if request.method == 'GET':
-        memory = get_object_or_404(Place, pk=memory_pk, user=request.user)
-        form = PlaceForm(instance=memory)
-        coords = str(memory.latitude) + ',' + str(memory.longitude)
-        context = {
-            'memory': memory,
-            'form': form,
-            'coords': coords,
-        }
+        context = get_memory_detail_context(request, memory_pk)
         return render(request, 'places_remember/create_memory.html', context)
     else:
-        create_or_edit_place(request, memory_pk)
+        edit_place_obj(request, memory_pk)
         return redirect('my_memories')
 
 
@@ -60,7 +50,7 @@ def create_memory(request):
     if request.method == 'GET':
         return render(request, 'places_remember/create_memory.html', {'form': PlaceForm})
     else:
-        create_or_edit_place(request)
+        create_place_obj(request)
         return redirect('my_memories')
 
 
@@ -72,19 +62,47 @@ def delete_memory(request, memory_pk):
         return redirect('my_memories')
 
 
-@login_required
-def create_or_edit_place(request, memory_pk=None):
+def create_place_obj(request):
     form = PlaceForm(request.POST)
     if not form.is_valid():
-        raise Http404('Слишком много текста, думаю можно и поменьше')
-    if memory_pk is None:
-        place = form.save(commit=False)
-        place.user = request.user
-    else:
-        place = get_object_or_404(Place, pk=memory_pk, user=request.user)
-        place.title = request.POST['title']
-        place.discription = request.POST['discription']
+        raise Http404('Слишком длинный заголовок')
+    place = form.save(commit=False)
+    place.user = request.user
     coords = request.POST['coords'].split(',')
     place.latitude = coords[0]
     place.longitude = coords[1]
     place.save()
+    return place
+
+
+def edit_place_obj(request, memory_pk):
+    form = PlaceForm(request.POST)
+    if not form.is_valid():
+        raise Http404('Слишком много текста, думаю можно и поменьше')
+    place = get_object_or_404(Place, pk=memory_pk, user=request.user)
+    place.title = request.POST['title']
+    place.discription = request.POST['discription']
+    coords = request.POST['coords'].split(',')
+    place.latitude = coords[0]
+    place.longitude = coords[1]
+    place.save()
+
+
+def get_memory_detail_context(request, memory_pk):
+    memory = get_object_or_404(Place, pk=memory_pk, user=request.user)
+    form = PlaceForm(instance=memory)
+    coords = str(memory.latitude) + ',' + str(memory.longitude)
+    context = {
+        'memory': memory,
+        'form': form,
+        'coords': coords,
+    }
+    return context
+
+
+def get_my_memories_context(request):
+    context = {}
+    all_memories = Place.objects.filter(user=request.user)
+    if all_memories is not None:
+        context['memories'] = all_memories
+    return context
