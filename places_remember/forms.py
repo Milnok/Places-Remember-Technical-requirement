@@ -3,12 +3,13 @@ from .models import Place
 
 
 class PlaceForm(forms.ModelForm):
-    title = forms.CharField(label='',
-                            widget=forms.TextInput(attrs={
-                                "class": "form-control",
-                                "placeholder": "Введите название места",
-                                'style': 'font-size: 30px',
-                            }))
+    title = forms.CharField(
+        label='',
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Введите название места",
+            'style': 'font-size: 30px',
+        }))
     discription = forms.CharField(
         required=False,
         widget=forms.Textarea(
@@ -19,7 +20,15 @@ class PlaceForm(forms.ModelForm):
             }
         )
     )
+    coords = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'type': "hidden",
+                "id": "coords",
+            }
+        )
+    )
 
     class Meta:
         model = Place
-        fields = ('title', 'discription')
+        fields = ('title', 'discription', 'coords')

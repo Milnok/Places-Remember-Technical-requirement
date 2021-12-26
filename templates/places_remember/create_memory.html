@@ -17,7 +17,7 @@
 <div class="map" id="map"></div>
 <div class="div2">
     <form method="POST" action="">{% csrf_token %}
-        <input type="hidden" id="coords" name="coords" value="{{ coords }}">
+        {{ form.coords }}
         Название места
         {{ form.title }}
         Описание места
@@ -31,8 +31,8 @@
         </button>
     </form>
     {% if memory %}
-    <form method="POST" action="{% url 'delete' memory.id %}">{% csrf_token %}
-        <button class="btn btn-danger btn-lg" type="submit">Удалить воспоминание</button>
+    <form method="POST" action="{% url 'delete' memory.pk %}">{% csrf_token %}
+        <button class="btn btn-danger btn-lg" type="submit" value="Delete">Удалить воспоминание</button>
     </form>
 </div>
 {% endif %}
