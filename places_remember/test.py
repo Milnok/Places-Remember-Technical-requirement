@@ -33,7 +33,7 @@ class ViewTestCase(TestCase):
         response = self.client.get(reverse('my_memories'))
         self.assertEqual(response.status_code, 200)
 
-    def test_create_memory(self):
+    def test_create_memory_view(self):
         self.client.login(username='user123', password='qwerty')
         response = self.client.get(reverse('create_memory'))
         self.assertEqual(response.status_code, 200)

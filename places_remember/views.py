@@ -37,7 +37,6 @@ class MemoryDetails(UpdateView):
     form_class = PlaceForm
     template_name = 'places_remember/create_memory.html'
     pk_url_kwarg = 'memory_pk'
-    template_name_suffix = '_update_form'
     success_url = '/my_memories'
     context_object_name = 'memory'
 
