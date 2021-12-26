@@ -1,16 +1,10 @@
-from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse, reverse
+from django.shortcuts import redirect, reverse
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.views.generic import ListView, DetailView, CreateView, View, TemplateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, View, TemplateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import PlaceForm
 from .models import Place
-
-
-def handle_404(request, exception):
-    return redirect('home')
 
 
 class Home(TemplateView):

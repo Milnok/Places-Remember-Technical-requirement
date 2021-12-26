@@ -17,4 +17,3 @@ urlpatterns = [
     path('create_memory/', login_required(CreateMemory.as_view()), name='create_memory'),
 
 ]
-handler404 = 'places_remember.views.handle_404'
